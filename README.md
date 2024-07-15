@@ -91,7 +91,7 @@ Converts an image $x \in \mathbb{R}^{H \times W \times C}$ into a sequence of fl
 
 3. **Transformer Encoder**: Applies multiple layers of the standard Transformer encoder to the sequence of embedded patches.
 
-![image](https://github.com/user-attachments/assets/4de8e12f-8439-4d12-a4fc-ff9b9ff8dda4)
+![image](https://github.com/user-attachments/assets/c9d39dfd-51e4-41d2-b52d-960646c0f3c7)
 
    
 4. **Classification Head**: Uses the output of the Transformer encoder for classification.
