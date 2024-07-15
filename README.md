@@ -65,19 +65,27 @@ The Vision Transformer (ViT) architecture consists of the following main compone
 
    ```python
    class PatchEmbedding(nn.Module):
-       def __init__(self, img_size, patch_size, in_chans, embed_dim):
-           super().__init__()
-           self.img_size = img_size
-           self.patch_size = patch_size
-           self.grid_size = img_size // patch_size
-           self.num_patches = self.grid_size ** 2
-           self.proj = nn.Conv2d(in_chans, embed_dim, kernel_size=patch_size, stride=patch_size)
-
-       def forward(self, x):
-           x = self.proj(x)  # (B, C, H, W) -> (B, E, H/P, W/P)
-           x = x.flatten(2)  # (B, E, H/P, W/P) -> (B, E, N)
-           x = x.transpose(1, 2)  # (B, E, N) -> (B, N, E)
-           return x
+    """Turns a 2D input image inta a 1D sequence learnable embedding"""
+    def __init__(self,
+                in_channels:int=3,
+                patch_size:int=16,
+                embedding_dim:int=768):
+        super().__init__()
+        # To turn an image into patches
+        self.patcher=nn.Conv2d(in_channels=in_channels,
+                              out_channels=embedding_dim,
+                              kernel_size=patch_size,
+                              stride=patch_size,
+                              padding=0)
+        # Create a layer to flatten the patch feature maps into a single dimension
+        self.flatten=nn.Flatten(start_dim=2, end_dim=3)
+        
+    def forward(self, x):
+        image_resol = x.shape[-1]
+        assert image_resol%patch_size==0, f"Input image size must be divisble by patch size, image shape: {image_resol}, patch size: {patch_size}"
+        x_patched = self.patcher(x)
+        x_flattened = self.flatten(x_patched)
+        return x_flattened.permute(0,2,1)
    ```
 
 2. **Transformer Encoder**: Applies multiple layers of the standard Transformer encoder to the sequence of embedded patches.
