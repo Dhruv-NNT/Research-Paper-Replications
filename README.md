@@ -61,7 +61,7 @@ jupyter notebook vision-transformer-pytorch.ipynb
 
 The Vision Transformer (ViT) architecture consists of the following main components:
 
-1. **Patch Embedding Layer**: Converts an image \( x \in \mathbb{R}^{H \times W \times C} \) into a sequence of flattened 2D patches \( x_p \in \mathbb{R}^{N \times (P^2 \cdot C)} \), where \( (H, W) \) is the image size, \( C \) is the number of channels, \( (P, P) \) is the patch size, and \( N = \frac{HW}{P^2} \) is the number of patches.
+1. **Patch Embedding Layer**:  Converts an image \( x \in \mathbb{R}^{H \times W \times C} \) into a sequence of flattened 2D patches \( x_p \in \mathbb{R}^{N \times (P^2 \cdot C)} \), where \( (H, W) \) is the image size, \( C \) is the number of channels, \( (P, P) \) is the patch size, and \( N = \frac{HW}{P^2} \) is the number of patches.
 
    ```python
    class PatchEmbedding(nn.Module):
