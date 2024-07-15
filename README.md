@@ -1,3 +1,4 @@
+```
 # 🖼️ An Image is Worth 16x16 Words: Vision Transformers in PyTorch
 
 This project replicates the famous research paper "An Image is Worth 16x16 Words" using PyTorch. The paper introduces Vision Transformers (ViTs), which apply the Transformer architecture, originally designed for natural language processing, to image classification tasks. This implementation demonstrates how ViTs can achieve state-of-the-art performance on image classification benchmarks.
@@ -135,3 +136,4 @@ For any questions or feedback, feel free to reach out to:
 
 - **Name**: Aradhya Dhruv
 - **Email**: aradhya.dhruv@gmail.com
+```
