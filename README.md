@@ -91,8 +91,9 @@ Converts an image $x \in \mathbb{R}^{H \times W \times C}$ into a sequence of fl
 
 3. **Transformer Encoder**: Applies multiple layers of the standard Transformer encoder to the sequence of embedded patches.
 
-   ![Vision Transformer Architecture](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*mMQq8GlCOV2psTGR11Khcw.png)
+![image](https://github.com/user-attachments/assets/4de8e12f-8439-4d12-a4fc-ff9b9ff8dda4)
 
+   
 4. **Classification Head**: Uses the output of the Transformer encoder for classification.
 
 ### Mathematical Formulation
@@ -100,14 +101,14 @@ Converts an image $x \in \mathbb{R}^{H \times W \times C}$ into a sequence of fl
 The Transformer encoder operates on the sequence of embedded patches $x_p$ using multi-head self-attention and feed-forward neural networks:
 
 1. **Multi-Head Self-Attention**:
-   \[
+   $\[
    \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
-   \]
+   \]$
 
 2. **Feed-Forward Network**:
-   \[
+   $\[
    \text{FFN}(x) = \text{ReLU}(xW_1 + b_1)W_2 + b_2
-   \]
+   \]$
 
 ## 🔍 Insights and Results
 
