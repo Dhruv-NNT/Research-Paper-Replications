@@ -97,25 +97,23 @@ Converts an image $x \in \mathbb{R}^{H \times W \times C}$ into a sequence of fl
 
 ### Mathematical Formulation
 
-The Transformer encoder operates on the sequence of embedded patches \( x_p \) using multi-head self-attention and feed-forward neural networks:
+The Transformer encoder operates on the sequence of embedded patches $x_p$ using multi-head self-attention and feed-forward neural networks:
 
 1. **Multi-Head Self-Attention**:
-```
    \[
    \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
    \]
-```
+
 2. **Feed-Forward Network**:
-```
    \[
    \text{FFN}(x) = \text{ReLU}(xW_1 + b_1)W_2 + b_2
    \]
-```
+
 ## 🔍 Insights and Results
 
 ### Insights from Implementation
 
-- **Patch Size Impact**: The choice of patch size \( (P, P) \) significantly affects the performance and computational efficiency.
+- **Patch Size Impact**: The choice of patch size $(P, P)$ significantly affects the performance and computational efficiency.
 - **Data Augmentation**: Effective data augmentation techniques are crucial for training ViTs to prevent overfitting.
 - **Transfer Learning**: Fine-tuning pre-trained ViTs on specific datasets can lead to substantial performance improvements.
 
