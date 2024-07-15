@@ -1,4 +1,3 @@
-```
 # 🖼️ An Image is Worth 16x16 Words: Vision Transformers in PyTorch
 
 This project replicates the famous research paper "An Image is Worth 16x16 Words" using PyTorch. The paper introduces Vision Transformers (ViTs), which apply the Transformer architecture, originally designed for natural language processing, to image classification tasks. This implementation demonstrates how ViTs can achieve state-of-the-art performance on image classification benchmarks.
@@ -62,8 +61,10 @@ jupyter notebook vision-transformer-pytorch.ipynb
 
 The Vision Transformer (ViT) architecture consists of the following main components:
 
-1. **Patch Embedding Layer**:  Converts an image \( x \in \mathbb{R}^{H \times W \times C} \) into a sequence of flattened 2D patches \( x_p \in \mathbb{R}^{N \times (P^2 \cdot C)} \), where \( (H, W) \) is the image size, \( C \) is the number of channels, \( (P, P) \) is the patch size, and \( N = \frac{HW}{P^2} \) is the number of patches.
-
+1. **Patch Embedding Layer**:
+```
+Converts an image \( x \in \mathbb{R}^{H \times W \times C} \) into a sequence of flattened 2D patches \( x_p \in \mathbb{R}^{N \times (P^2 \cdot C)} \), where \( (H, W) \) is the image size, \( C \) is the number of channels, \( (P, P) \) is the patch size, and \( N = \frac{HW}{P^2} \) is the number of patches.
+```
    ```python
    class PatchEmbedding(nn.Module):
     """Turns a 2D input image inta a 1D sequence learnable embedding"""
@@ -89,28 +90,28 @@ The Vision Transformer (ViT) architecture consists of the following main compone
         return x_flattened.permute(0,2,1)
    ```
 
-2. **Transformer Encoder**: Applies multiple layers of the standard Transformer encoder to the sequence of embedded patches.
+3. **Transformer Encoder**: Applies multiple layers of the standard Transformer encoder to the sequence of embedded patches.
 
    ![Vision Transformer Architecture](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*mMQq8GlCOV2psTGR11Khcw.png)
 
-3. **Classification Head**: Uses the output of the Transformer encoder for classification.
+4. **Classification Head**: Uses the output of the Transformer encoder for classification.
 
 ### Mathematical Formulation
 
 The Transformer encoder operates on the sequence of embedded patches \( x_p \) using multi-head self-attention and feed-forward neural networks:
 
 1. **Multi-Head Self-Attention**:
-
+```
    \[
    \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
    \]
-
+```
 2. **Feed-Forward Network**:
-
+```
    \[
    \text{FFN}(x) = \text{ReLU}(xW_1 + b_1)W_2 + b_2
    \]
-
+```
 ## 🔍 Insights and Results
 
 ### Insights from Implementation
@@ -136,4 +137,3 @@ For any questions or feedback, feel free to reach out to:
 
 - **Name**: Aradhya Dhruv
 - **Email**: aradhya.dhruv@gmail.com
-```
