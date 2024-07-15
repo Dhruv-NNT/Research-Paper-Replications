@@ -1,1 +1,129 @@
+# 🖼️ An Image is Worth 16x16 Words: Vision Transformers in PyTorch
 
+This project replicates the famous research paper "An Image is Worth 16x16 Words" using PyTorch. The paper introduces Vision Transformers (ViTs), which apply the Transformer architecture, originally designed for natural language processing, to image classification tasks. This implementation demonstrates how ViTs can achieve state-of-the-art performance on image classification benchmarks.
+
+## 📚 Project Overview
+
+### Research Paper Summary
+
+The research paper "An Image is Worth 16x16 Words" proposes the Vision Transformer (ViT), which splits an image into patches and processes them as a sequence of words using a standard Transformer encoder. This method leverages the strengths of Transformers in capturing long-range dependencies and has shown to outperform traditional convolutional neural networks (CNNs) on image classification tasks.
+
+### Key Contributions
+
+- **Patch Embeddings**: Splitting images into fixed-size patches and linearly embedding each patch.
+- **Transformer Encoder**: Applying a Transformer encoder to the sequence of embedded patches.
+- **Classification Head**: Using the output of the Transformer encoder for image classification.
+
+## 🛠️ Installation
+
+1. **Clone the repository:**
+
+```bash
+git clone https://github.com/your-username/Research-Paper-Replications.git
+cd Research-Paper-Replications
+```
+
+2. **Create a virtual environment and activate it:**
+
+```bash
+python -m venv env
+source env/bin/activate  # On Windows, use `env\Scripts\activate`
+```
+
+3. **Install the required dependencies:**
+
+```bash
+pip install -r requirements.txt
+```
+
+## 📂 Code Structure
+
+```
+📦Research-Paper-Replications
+ ┣ 📜An image is worth 16x16 words.pdf       # The actual research paper
+ ┣ 📜vision-transformer-pytorch.ipynb        # Jupyter notebook with code and experiments
+ ┗ 📜vision-transformer-pytorch.html         # HTML export of the Jupyter notebook
+```
+
+## 🚀 Running the Code
+
+1. **Open the Jupyter Notebook:**
+
+```bash
+jupyter notebook vision-transformer-pytorch.ipynb
+```
+
+2. **Run the cells in the notebook to execute the experiments and view the results.**
+
+## 📝 Implementation Details
+
+### Vision Transformer (ViT) Architecture
+
+The Vision Transformer (ViT) architecture consists of the following main components:
+
+1. **Patch Embedding Layer**: Converts an image \( x \in \mathbb{R}^{H \times W \times C} \) into a sequence of flattened 2D patches \( x_p \in \mathbb{R}^{N \times (P^2 \cdot C)} \), where \( (H, W) \) is the image size, \( C \) is the number of channels, \( (P, P) \) is the patch size, and \( N = \frac{HW}{P^2} \) is the number of patches.
+
+   ```python
+   class PatchEmbedding(nn.Module):
+       def __init__(self, img_size, patch_size, in_chans, embed_dim):
+           super().__init__()
+           self.img_size = img_size
+           self.patch_size = patch_size
+           self.grid_size = img_size // patch_size
+           self.num_patches = self.grid_size ** 2
+           self.proj = nn.Conv2d(in_chans, embed_dim, kernel_size=patch_size, stride=patch_size)
+
+       def forward(self, x):
+           x = self.proj(x)  # (B, C, H, W) -> (B, E, H/P, W/P)
+           x = x.flatten(2)  # (B, E, H/P, W/P) -> (B, E, N)
+           x = x.transpose(1, 2)  # (B, E, N) -> (B, N, E)
+           return x
+   ```
+
+2. **Transformer Encoder**: Applies multiple layers of the standard Transformer encoder to the sequence of embedded patches.
+
+   ![Vision Transformer Architecture](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*mMQq8GlCOV2psTGR11Khcw.png)
+
+3. **Classification Head**: Uses the output of the Transformer encoder for classification.
+
+### Mathematical Formulation
+
+The Transformer encoder operates on the sequence of embedded patches \( x_p \) using multi-head self-attention and feed-forward neural networks:
+
+1. **Multi-Head Self-Attention**:
+
+   \[
+   \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+   \]
+
+2. **Feed-Forward Network**:
+
+   \[
+   \text{FFN}(x) = \text{ReLU}(xW_1 + b_1)W_2 + b_2
+   \]
+
+## 🔍 Insights and Results
+
+### Insights from Implementation
+
+- **Patch Size Impact**: The choice of patch size \( (P, P) \) significantly affects the performance and computational efficiency.
+- **Data Augmentation**: Effective data augmentation techniques are crucial for training ViTs to prevent overfitting.
+- **Transfer Learning**: Fine-tuning pre-trained ViTs on specific datasets can lead to substantial performance improvements.
+
+### Results
+
+- **Accuracy**: The implemented Vision Transformer achieved competitive accuracy on benchmark datasets.
+- **Efficiency**: Despite the lack of inductive biases inherent in CNNs, ViTs demonstrated remarkable efficiency in capturing global context.
+
+## 📊 Future Work
+
+- **Experiment with Different Patch Sizes**: Analyze the impact of various patch sizes on model performance.
+- **Incorporate Positional Embeddings**: Enhance the model by experimenting with different types of positional embeddings.
+- **Explore Hybrid Models**: Combine ViTs with convolutional layers to leverage the benefits of both architectures.
+
+## 📧 Contact
+
+For any questions or feedback, feel free to reach out to:
+
+- **Name**: Aradhya Dhruv
+- **Email**: aradhya.dhruv@gmail.com
